@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '1.0'
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'Gradle Quickstart',
+    'Implementation-Version': version
+  }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+  //compile project(':CukeRestSalad')
+  compile('org.cukesalad:CukeDBSalad:1.0.2')
+  compile('org.hsqldb:hsqldb:2.3.3')
+}
+mainClassName = "org.junit.runner.JUnitCore"
+
+test { systemProperties 'property': 'value' }
+
+uploadArchives {
+  repositories {
+    flatDir { dirs 'repos' }
+  }
+}
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.9'
+}
